@@ -23,14 +23,14 @@ with DAG(
     catchup=False
 ) as dag:
 
-    # Create schema if it doesn't exist
+    
     create_schema = PostgresOperator(
         task_id='create_schema',
         postgres_conn_id='redshift_connection_id',
         sql="CREATE SCHEMA IF NOT EXISTS food_delivery_datamart;",
     )
 
-    # Drop tables if they exist
+    
     drop_dimCustomers = PostgresOperator(
         task_id='drop_dimCustomers',
         postgres_conn_id='redshift_connection_id',
@@ -55,7 +55,7 @@ with DAG(
         sql="DROP TABLE IF EXISTS food_delivery_datamart.factOrders;",
     )
 
-    # Create dimension and fact tables
+    
     create_dimCustomers = PostgresOperator(
         task_id='create_dimCustomers',
         postgres_conn_id='redshift_connection_id',
@@ -119,7 +119,7 @@ with DAG(
         """,
     )
 
-    # Load data into dimension tables from S3
+    
     load_dimCustomers = S3ToRedshiftOperator(
         task_id='load_dimCustomers',
         schema='food_delivery_datamart',
@@ -158,10 +158,10 @@ with DAG(
     trigger_dag_id="submit_pyspark_streaming_job_to_emr",
     )
 
-# First, create the schema
+
 create_schema >> [drop_dimCustomers, drop_dimRestaurants, drop_dimDeliveryRiders, drop_factOrders]
 
-# Once the existing tables are dropped, proceed to create new tables
+
 drop_dimCustomers >> create_dimCustomers
 drop_dimRestaurants >> create_dimRestaurants
 drop_dimDeliveryRiders >> create_dimDeliveryRiders
@@ -169,7 +169,7 @@ drop_factOrders >> create_factOrders
 
 [create_dimCustomers, create_dimRestaurants, create_dimDeliveryRiders] >> create_factOrders
 
-# After each table is created, load the corresponding data
+
 create_dimCustomers >> load_dimCustomers
 create_dimRestaurants >> load_dimRestaurants
 create_dimDeliveryRiders >> load_dimDeliveryRiders
