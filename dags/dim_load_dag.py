@@ -3,6 +3,7 @@ from airflow.providers.amazon.aws.transfers.s3_to_redshift import S3ToRedshiftOp
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.utils.dates import days_ago
 from datetime import timedelta
+from datetime import datetime
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 default_args = {
@@ -19,7 +20,7 @@ with DAG(
     default_args=default_args,
     description='ETL for food delivery data into Redshift',
     schedule_interval=None,
-    start_date=days_ago(1),
+    start_date=datetime.now(),
     catchup=False
 ) as dag:
 
