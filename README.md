@@ -90,4 +90,22 @@ Performs actions (show, save to file, write to DB, etc.)
 AMAZON EMR USED IN THIS PROJECT TO CLEAN,TRANFORM THE DATA COMING FROM KINESIS WHICH IS THEN STORED IN AMZON REDSHIFT DATAWAREHOUSE TO BE USED FOR GENERATING INSIGHTS FROM THAT DATA. 
 A PYSPARK STREAMING SCRIPT IS DEVELOPED WHICH IS USED IN THE EMR FOR CLEANING.TRANFOMRATION AND PROCESSING
 
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/emr2.png?raw=true)
 
+THE ABOVE IMAGE SHOWS THAT AMAZON EMR IS FULL READY AND IN ACTIVE STATE ALONG WITH IT ON THE PRIMARY NODE IT OFFERS VARIOUS SERVICES WHICH WERE CHOSEN DURING THE MAKING OF AMAZON EMR.
+THE FOLLOWINF SERVICES -
+HDFS NODE
+HUE 
+LIVY
+RESOURCE MANAGER
+SPARK HISTORY SERVER
+
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20195416.png?raw=true)
+
+**📊 Amazon Redshift — AWS Data Warehouse Service**
+
+Amazon Redshift is a fully managed cloud-based data warehouse provided by AWS. 
+It allows you to run high-performance SQL analytics on large volumes of structured and semi-structured data (in terabytes or even petabytes).
+
+AMAZON REDSHIFT IS USED IN THIS PROJECT TO STORE DATA THAT COMES FROM AAMAZON EMR TO STORE THEM IN DATA WAREHOUSE TO BE USED BY BUSINESSES TO GENERATE INSIGHTS FROM THE DATA .
+THE DATA IS STORED IN REDSHIFT IN STAR SCHEMA WHICH HAS FACT AND DIMENSIONS TABLE.
