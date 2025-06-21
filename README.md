@@ -3,6 +3,8 @@
 
 THE ABOVE IS THE ARCHITECTURE OF REAL TIME FODD DELIVERY DATA PIPELINE WHICH INVOLVES THE USE OF AWS KINESIS , AWS EMR , AWS REDSHIFT , AWS S3 BUCKET , AWS CODEBUILD AND MOCK DATA GENERATOR.
 
+⚡️ Amazon Kinesis — Real-Time Data Streaming on AWS
+
 Amazon Kinesis is a fully managed service from AWS (Amazon Web Services) designed to collect, process, and analyze real-time streaming data. It's useful when you need to handle large volumes of data as it arrives, especially in real time.
 
 THE KINESIS USES KINESIS STREAMS IN THE ABOVE PROJECT TAHT TAKES IN REAL-TIME FOOD DELIVERY DATA WHICH HAS 
@@ -50,6 +52,40 @@ Edit
 
 ![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/emr.png?raw=true)
 
+✅ Amazon EMR (Elastic MapReduce)
 
+
+Amazon EMR (Elastic MapReduce) is a big data processing service provided by AWS. It allows you to easily run large-scale distributed data processing jobs using frameworks like Apache Spark, Hadoop, Hive, Presto, and more — without managing infrastructure.
+
+A PySpark script is a Python program that uses Apache Spark (via the PySpark library) to process and analyze big data in a distributed computing environment.
+
+🔥 What is PySpark?
+PySpark = Python + Apache Spark
+It allows you to write Spark applications in Python, instead of Java or Scala.
+
+Apache Spark is a fast, in-memory data processing engine used for big data workloads like:
+
+ETL (Extract, Transform, Load)
+
+Machine learning
+
+Real-time stream processing
+
+SQL queries
+
+🧾 What Does a PySpark Script Look Like?
+A PySpark script typically:
+
+Initializes a Spark session
+
+Reads data (CSV, JSON, Parquet, from S3, HDFS, etc.)
+
+Transforms data (filter, map, join, group, aggregate, etc.)
+
+Performs actions (show, save to file, write to DB, etc.)
+
+
+
+AMAZON EMR USED IN THIS PROJECT TO CLEAN,TRANFORM THE DATA COMING FROM KINESIS WHICH IS THEN STORED IN AMZON REDSHIFT DATAWAREHOUSE TO BE USED FOR GENERATING INSIGHTS FROM THAT DATA. A PYSPARK STREAMING SCRIPT IS DEVELOPED WHICH IS USED IN THE EMR FOR CLEANING.TRANFOMRATION AND PROCESSING
 
 
