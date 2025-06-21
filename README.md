@@ -1,5 +1,55 @@
 ![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/aws_project_architecture.drawio.png?raw=true)
 
 
-THE ABOVE IS THE ARCHITECTURE OF REAL TIME FODD DELIVERY DATA PIPELINE WHICH INVOLVES THE USE OF AWS KINESIS , AWS EMR , AWS REDSHIFT , AWS S3 BUCKET , AWS CODEBUILD AND MOCK DATA GENERATOR. THE 
+THE ABOVE IS THE ARCHITECTURE OF REAL TIME FODD DELIVERY DATA PIPELINE WHICH INVOLVES THE USE OF AWS KINESIS , AWS EMR , AWS REDSHIFT , AWS S3 BUCKET , AWS CODEBUILD AND MOCK DATA GENERATOR.
+
+Amazon Kinesis is a fully managed service from AWS (Amazon Web Services) designed to collect, process, and analyze real-time streaming data. It's useful when you need to handle large volumes of data as it arrives, especially in real time.
+
+THE KINESIS USES KINESIS STREAMS IN THE ABOVE PROJECT TAHT TAKES IN REAL-TIME FOOD DELIVERY DATA WHICH HAS 
+        'OrderID'
+        'CustomerID' 
+        'RestaurantID'
+        'RiderID'
+        'OrderDate'
+        'DeliveryTime'
+        'OrderValue'
+        'DeliveryFee'
+        'TipAmount'
+        'OrderStatus'
+AS THE IMPORTANT DATA IN IT.THE KINESIS STORES THE REAL TIME DATA IN THE KINESIS SHARDS.
+
+Shard
+A shard is a unit of capacity and storage in Kinesis.
+
+Each shard:
+
+Can ingest up to 1 MB/sec or 1000 records/sec.
+
+Can emit up to 2 MB/sec to consumers.
+
+Stores data for a default of 24 hours (can be increased to 7 days)
+
+ Record
+Each record in Kinesis contains:
+
+Data blob: Your actual data (e.g., JSON, CSV, etc., up to 1 MB).
+
+Partition key: Used to group data (and determine shard placement).
+
+Sequence number: Unique ID per record for ordering.
+
+Example Record:
+json
+Copy
+Edit
+{
+  "partitionKey": "user-1234",
+  "data": "base64-encoded-data",
+  "sequenceNumber": "49590338271490256608559692538361571095921575989136588898"
+}
+
+
+
+
+
 
