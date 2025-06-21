@@ -201,6 +201,28 @@ THE ABOVE IMAGE SHOWS THE SPINNING UP OF BOTH THE DAG.
 
 ![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20230912.png?raw=true)
 
+THE ABOVE IMAGE SHOWS THE GRAPH OF THE DAGS THAT ARE SPINNED UP.
+In Apache Airflow, a Graph refers to the graphical representation of a DAG (Directed Acyclic Graph) — a workflow made up of tasks with dependencies. This is visualized in the Graph View inside the Airflow UI.
+
+**🧭 What is a DAG?**
+A DAG (Directed Acyclic Graph) is a collection of tasks (nodes) connected by dependencies (edges). The tasks are executed in a specific order defined by the graph.
+
+In Airflow:
+
+Each task is a node.
+
+Dependencies are arrows between tasks.
+
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20230831.png?raw=true)
+
+THE ABOVE IMAGE SHOWS THE CODEBUILD RUNNING AND BUILDING THE TASK. WE HAVE BUILDSPE.YML FILE IN THE CODEBUILD
+
+**🚀 What is Amazon CodeBuild?**
+
+Amazon CodeBuild is a fully managed continuous integration (CI) service by AWS that compiles source code, runs tests, and produces build artifacts. It eliminates the need to provision, manage, and scale your own build servers.
+
+![image alt](https://www.loom.com/i/1c9e54fdd5ac425a8b2eedbdade1d08c)
+
 
 
 
