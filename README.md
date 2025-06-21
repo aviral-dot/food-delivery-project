@@ -109,3 +109,98 @@ It allows you to run high-performance SQL analytics on large volumes of structur
 
 AMAZON REDSHIFT IS USED IN THIS PROJECT TO STORE DATA THAT COMES FROM AAMAZON EMR TO STORE THEM IN DATA WAREHOUSE TO BE USED BY BUSINESSES TO GENERATE INSIGHTS FROM THE DATA .
 THE DATA IS STORED IN REDSHIFT IN STAR SCHEMA WHICH HAS FACT AND DIMENSIONS TABLE.
+
+
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20195427.png)
+
+An Amazon Airflow environment refers to a managed workflow orchestration environment provided by Amazon MWAA (Managed Workflows for Apache Airflow). It allows you to run and scale Apache Airflow workflows on AWS without having to manage the underlying infrastructure.
+
+**✅ What is Apache Airflow?**
+Apache Airflow is an open-source platform used to programmatically author, schedule, and monitor workflows (DAGs). It is widely used in data engineering, ETL pipelines, ML workflows, etc.
+
+**✅ What is Amazon MWAA?**
+Amazon MWAA (Managed Workflows for Apache Airflow) is a fully managed service that makes it easy to run Apache Airflow on AWS.
+
+APACHE AIRFLOW IS USED IN THIS PROJECT TO CREATE TWO DAGS AND ORCHESTRATE THEM :
+1) **airflow_to_emr.py**
+
+THIS DAG IS USED TO SPIN THE SPARK CLUSTER IN THE ACTIVE AMAZON EMR SERVICE SO THAT PROCESSING OF REAL TIME INCOMING DATA CAN BE DONE.
+THIS CREATE A SPARK CLUSTER ALONG WITH THE FOLLOWING CONFIGURATION.
+step_adder = EmrAddStepsOperator(
+    task_id='add_step',
+    job_flow_id='j-2FN0DTES2KKFF',
+    aws_conn_id='aws_default',
+    steps=[{
+        'Name': 'Run PySpark Streaming Script',
+        'ActionOnFailure': 'CONTINUE',
+        'HadoopJarStep': {
+            'Jar': 'command-runner.jar',
+            'Args': [
+                'spark-submit',
+                '--deploy-mode',
+                'cluster',
+                '--num-executors', '3',
+                '--executor-memory', '6G',
+                '--executor-cores', '3',
+                '--packages', packages_list,
+                '--jars', jdbc_jar_s3_path,
+                's3://food-important-files/pyspark_script/pyspark_streaming.py',
+                '--redshift_user', redshift_user,
+                '--redshift_password', redshift_password,
+                '--aws_access_key', aws_access_key,
+                '--aws_secret_key', aws_secret_key,
+            ],
+        },
+    }],
+    dag=dag,
+)
+
+**2)dim_load_dag.py:**
+
+THIS DAG OF AIRFLOW IS USED TO LOAD THE DIMENSION TABLE OF dimCustomers , dimRestaurants , dimDeliveryRiders , WITH DATA AND factOrders TABLE WILL KEEP THE RECORD OF REAL TIME DATA ACCORDING TO THE STAR SCHEMA STRUCTURE.
+
+**⭐ What is Star Schema?**
+A Star Schema organizes data into fact and dimension tables:
+
+Fact Table: Central table that stores quantitative data (metrics/measures).
+
+Dimension Tables: Surrounding tables that store descriptive attributes (who, what, when, where, how).
+
+The schema resembles a star shape, hence the name.
+
+🧱 Structure:
+lua
+Copy
+Edit
+               +-------------+
+               |  Dim_Date   |
+               +-------------+
+                     |
+                     |
++------------+   +------------+   +------------+   +------------+
+| Dim_Customer | | Dim_Product | | Dim_Region  | | Dim_SalesRep|
++------------+   +------------+   +------------+   +------------+
+       \             |              |              /
+        \            |              |             /
+                  +----------------------+
+                  |      Fact_Sales      |
+                  +----------------------+
+                  | date_key             |
+                  | customer_key         |
+                  | product_key          |
+                  | region_key           |
+                  | salesrep_key         |
+                  | total_sales          |
+                  | quantity_sold        |
+                  +----------------------+
+                  
+
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20230754.png?raw=true)
+
+THE ABOVE IMAGE SHOWS THE SPINNING UP OF BOTH THE DAG.
+
+
+
+
+
+
