@@ -221,7 +221,7 @@ THE ABOVE IMAGE SHOWS THE CODEBUILD RUNNING AND BUILDING THE TASK. WE HAVE BUILD
 
 Amazon CodeBuild is a fully managed continuous integration (CI) service by AWS that compiles source code, runs tests, and produces build artifacts. It eliminates the need to provision, manage, and scale your own build servers.
 
-![image alt](https://www.loom.com/i/1c9e54fdd5ac425a8b2eedbdade1d08c)
+BUIDSPEC.YML DIRECTS THE JOB TO BE DONE OF CI/CD SIDE.
 
 
 
