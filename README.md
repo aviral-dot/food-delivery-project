@@ -199,7 +199,7 @@ Edit
 
 THE ABOVE IMAGE SHOWS THE SPINNING UP OF BOTH THE DAG.
 
-
+![image alt](https://github.com/aviral-dot/real-time-food-delivery-project/blob/main/Screenshot%202025-01-18%20230912.png?raw=true)
 
 
 
