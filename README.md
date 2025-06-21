@@ -60,6 +60,7 @@ Amazon EMR (Elastic MapReduce) is a big data processing service provided by AWS.
 A PySpark script is a Python program that uses Apache Spark (via the PySpark library) to process and analyze big data in a distributed computing environment.
 
 **🔥 What is PySpark?**
+
 PySpark = Python + Apache Spark
 It allows you to write Spark applications in Python, instead of Java or Scala.
 
