@@ -108,7 +108,7 @@ with DAG(
                 OrderID INT PRIMARY KEY,
                 CustomerID INT REFERENCES food_delivery_datamart.dimCustomers(CustomerID),
                 RestaurantID INT REFERENCES food_delivery_datamart.dimRestaurants(RestaurantID),
-                RiderID INT REFERENCES foods_delivery_datamart.dimDeliveryRiders(RiderID),
+                RiderID INT REFERENCES food_delivery_datamart.dimDeliveryRiders(RiderID),
                 OrderDate TIMESTAMP WITHOUT TIME ZONE,
                 DeliveryTime INT,
                 OrderValue DECIMAL(8,2),
