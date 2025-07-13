@@ -8,11 +8,11 @@ phases:
       - echo "Copying DAG files to S3..."
       - aws s3 cp --recursive ./dags s3://airflo-managed-gds/dags/
       - echo "Copying dim data files to S3..."
-      - aws s3 cp --recursive ./data_for_dims s3://food-delivery-data-analysis/dims/
+      - aws s3 cp --recursive ./data_for_dims s3://foods-delivery-data-analysis/dims/
       - echo "Copying pyspark scripts to S3..."
-      - aws s3 cp --recursive ./scripts s3://food-delivery-data-analysis/pyspark_script/
+      - aws s3 cp --recursive ./scripts s3://foods-delivery-data-analysis/pyspark_script/
       - echo "Copying redshift jar file to S3..."
-      - aws s3 cp --recursive ./jars s3://food-delivery-data-analysis/redshift-connector-jar/
+      - aws s3 cp --recursive ./jars s3://foods-delivery-data-analysis/redshift-connector-jar/
   post_build:
     commands:
       - echo "Build and deployment process complete!!!"
