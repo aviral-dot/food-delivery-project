@@ -42,7 +42,7 @@ step_adder = EmrAddStepsOperator(
                 '--executor-cores', '3',
                 '--packages', packages_list,
                 '--jars', jdbc_jar_s3_path,
-                's3://food-delivery-data-analysis/pyspark_script/pyspark_streaming.py',
+                's3://foods-delivery-data-analysis/pyspark_script/pyspark_streaming.py',
                 '--redshift_user', redshift_user,
                 '--redshift_password', redshift_password,
                 '--aws_access_key', aws_access_key,
