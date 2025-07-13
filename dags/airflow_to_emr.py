@@ -16,7 +16,7 @@ spark_packages = [
 ]
 packages_list = ",".join(spark_packages)
 
-jdbc_jar_s3_path = "s3://food-delivery-data-analysis/redshift-connector-jar/redshift-jdbc42-2.1.0.12.jar"
+jdbc_jar_s3_path = "s3://foods-delivery-data-analysis/redshift-connector-jar/redshift-jdbc42-2.1.0.12.jar"
 
 # Fetch Redshift credentials from Airflow Variables
 redshift_user = Variable.get("redshift_user")
