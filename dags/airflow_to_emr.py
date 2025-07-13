@@ -16,9 +16,9 @@ spark_packages = [
 ]
 packages_list = ",".join(spark_packages)
 
-jdbc_jar_s3_path = "s3://food-important-files/redshift-coonector-jar/redshift-jdbc42-2.1.0.12.jar"
+jdbc_jar_s3_path = "s3://food-delivery-data-analysis/redshift-connector-jar/redshift-jdbc42-2.1.0.12.jar"
 
-
+# Fetch Redshift credentials from Airflow Variables
 redshift_user = Variable.get("redshift_user")
 redshift_password = Variable.get("redshift_password")
 aws_access_key = Variable.get("aws_access_key")
@@ -26,7 +26,7 @@ aws_secret_key = Variable.get("aws_secret_key")
 
 step_adder = EmrAddStepsOperator(
     task_id='add_step',
-    job_flow_id='j-2FN0DTES2KKFF',
+    job_flow_id='j-3U18XD6N7FIQ6',
     aws_conn_id='aws_default',
     steps=[{
         'Name': 'Run PySpark Streaming Script',
@@ -42,7 +42,7 @@ step_adder = EmrAddStepsOperator(
                 '--executor-cores', '3',
                 '--packages', packages_list,
                 '--jars', jdbc_jar_s3_path,
-                's3://food-important-files/pyspark_script/pyspark_streaming.py',
+                's3://food-delivery-data-analysis/pyspark_script/pyspark_streaming.py',
                 '--redshift_user', redshift_user,
                 '--redshift_password', redshift_password,
                 '--aws_access_key', aws_access_key,

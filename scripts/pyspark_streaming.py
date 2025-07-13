@@ -12,13 +12,13 @@ args = parser.parse_args()
 
 appName = "KinesisToRedshift"
 kinesisStreamName = "incoming-food-order-data"
-kinesisRegion = "ap-south-1"
-checkpointLocation = "s3://food-checkpointing/stream/"
-redshiftJdbcUrl = f"jdbc:redshift://redshift-food.cmo4zpotuuzb.ap-south-1.redshift.amazonaws.com:5439/dev"
+kinesisRegion = "us-east-1"
+checkpointLocation = "s3://stream-checkpointing/kinesisToRedshift/"
+redshiftJdbcUrl = f"jdbc:redshift://redshift-cluster-1.c9jjfwzsdcai.us-east-1.redshift.amazonaws.com:5439/dev"
 redshiftTable = "food_delivery_datamart.factOrders"
-tempDir = "s3://redshift-123/temp-data/streaming_temp/"
+tempDir = "s3://redshift-temp-data-gdse/temp-data/streaming_temp/"
 
-
+# Define the schema of the incoming JSON data from Kinesis
 schema = StructType([
     StructField("OrderID", IntegerType(), True),
     StructField("CustomerID", IntegerType(), True),
@@ -43,7 +43,7 @@ df = spark \
     .option("startingPosition", "latest") \
     .option("region", kinesisRegion) \
     .option("awsUseInstanceProfile", "false") \
-    .option("endpointUrl", "https://kinesis.ap-south-1.amazonaws.com") \
+    .option("endpointUrl", "https://kinesis.us-east-1.amazonaws.com") \
     .option("awsAccessKeyId", args.aws_access_key) \
     .option("awsSecretKey", args.aws_secret_key) \
     .load()
@@ -51,10 +51,10 @@ df = spark \
 print("Consuming From Read Stream...")
 parsed_df = df.selectExpr("CAST(data AS STRING)").select(from_json(col("data"), schema).alias("parsed_data")).select("parsed_data.*")
 
-
+# Perform stateful deduplication
 deduped_df = parsed_df.withWatermark("OrderDate", "10 minutes").dropDuplicates(["OrderID"])
 
-
+# Writing Data to Redshift
 def write_to_redshift(batch_df, batch_id):
     batch_df.write \
         .format("jdbc") \
@@ -67,7 +67,7 @@ def write_to_redshift(batch_df, batch_id):
         .mode("append") \
         .save()
 
-
+# Write the deduplicated data to Redshift
 query = deduped_df.writeStream \
     .foreachBatch(write_to_redshift) \
     .outputMode("append") \
